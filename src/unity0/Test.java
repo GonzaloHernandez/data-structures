@@ -10,7 +10,25 @@ package unity0;
  * @author chalo
  */
 public class Test {
+    
+    static class Student extends Item {
+        String  name;
+        long    code;
+        
+        public Student(String n,long c) {
+            name = n;
+            code = c;
+        }
+        
+        public String toString() {
+            return name+" "+code+"\n";
+        }
+    }
+    
     public static void main(String args[]) {
-        System.out.println("Initialized");
+        Stack s = new Stack();
+        s.add(new Student("Gonzalo",2021192));
+        s.add(new Student("Jose",2026192));
+        s.print();
     }
 }
