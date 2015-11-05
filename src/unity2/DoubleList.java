@@ -11,22 +11,22 @@ package unity2;
  *
  * @author chalo
  */
-public class SimpleList {
+public class DoubleList {
     //----------------------------------------------------
     class Node {
-
         protected int value;
-        protected Node next;
-
+        protected Node next,back;
+        
         public Node(int v) {
             value = v;
             next = null;
+            back = null;
         }
-    }
+    }    
     //----------------------------------------------------
     private Node head;
     //----------------------------------------------------
-    public SimpleList() {
+    public DoubleList() {
         head = null;
     }
     //----------------------------------------------------
@@ -41,6 +41,7 @@ public class SimpleList {
                 aux = aux.next;
             }
             aux.next = n;
+            n.back = aux;
         }
     }
     //----------------------------------------------------
