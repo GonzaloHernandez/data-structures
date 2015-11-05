@@ -28,6 +28,7 @@ public class Test {
         t.printLevel(2);
         System.out.print("The path to element 2 is: ");
         t.printPath(2);
+        System.out.println("The nearest leaf is: "+t.nearestLeaf());
     }
     
     public static void main(String args[]) {

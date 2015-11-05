@@ -165,27 +165,27 @@ public class Tree {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     //----------------------------------------------------
-    class Info { int xr,xf; }
+    class Info { int xRoot,xFinal; }
     //----------------------------------------------------
     private Info draw(Node r,int x,int y,Graphics g) {
         Info rootInfo = new Info();
-        rootInfo.xf = x;
+        rootInfo.xFinal = x;
         if (r == null) return rootInfo;
 
         Info leftInfo,rightInfo;
         
         leftInfo = draw(r.left, x, y+50, g);
-        x = leftInfo.xf;
+        x = leftInfo.xFinal;
         
         g.drawOval(x, y, 30, 30);
         g.drawString(""+r.value, x+10, y+20);
-        rootInfo.xr = x;
+        rootInfo.xRoot = x;
 
         rightInfo = draw(r.right, x+30, y+50, g);
-        rootInfo.xf = rightInfo.xf;
+        rootInfo.xFinal = rightInfo.xFinal;
         
-        if (r.left  != null) g.drawLine(rootInfo.xr+ 5,y+25,leftInfo.xr+15,y+50);
-	if (r.right != null) g.drawLine(rootInfo.xr+25,y+25,rightInfo.xr+15,y+50);
+        if (r.left  != null) g.drawLine(rootInfo.xRoot+ 5,y+25,leftInfo.xRoot+15,y+50);
+	if (r.right != null) g.drawLine(rootInfo.xRoot+25,y+25,rightInfo.xRoot+15,y+50);
 
         return rootInfo;
     }
@@ -203,6 +203,53 @@ public class Tree {
         else {
             printLevel(l,r.left,c+1);
             printLevel(l,r.right,c+1);
+        }
+    }
+    //----------------------------------------------------
+    public int height() {
+        return height(root);
+    }
+    //----------------------------------------------------
+    private int height(Node r) {
+        if (r == null) return 0;
+        int leftHeight = height(r.left);
+        int rightHeight = height(r.right);
+        if (leftHeight > rightHeight) {
+            return leftHeight + 1;
+        }
+        else {
+            return rightHeight + 1;
+        }
+    }
+    //----------------------------------------------------
+    public int nearestLeaf() {
+        return nearestLeaf(root, 0).value;
+    }
+    class NearestLeafInfo { int level,value; }
+    //----------------------------------------------------
+    private NearestLeafInfo nearestLeaf(Node r, int c) {
+        NearestLeafInfo rootInfo = new NearestLeafInfo();
+        rootInfo.level = c;
+        rootInfo.value = -1;
+        if (r == null) return rootInfo;
+        if (r.left == null && r.right == null) {
+            rootInfo.level = c;
+            rootInfo.value = r.value;
+            return rootInfo;
+        }
+        NearestLeafInfo leftInfo = nearestLeaf(r.left, c+1);
+        NearestLeafInfo rightInfo = nearestLeaf(r.right, c+1);
+        if (r.left == null) {
+            return rightInfo;
+        }
+        else if (r.right == null) {
+            return leftInfo;
+        }
+        else if (leftInfo.level < rightInfo.level) {
+            return leftInfo;
+        }
+        else {
+            return rightInfo;
         }
     }
 }
