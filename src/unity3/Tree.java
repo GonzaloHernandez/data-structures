@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unti3;
+package unity3;
 
 import java.awt.Graphics;
+import java.util.Vector;
 import javax.swing.JFrame;
 
 /**
@@ -59,6 +60,41 @@ public class Tree {
         }
     }
     //----------------------------------------------------
+    public boolean exists(int v) {
+        Node aux = root;
+        while (aux != null) {
+            if (v < aux.value) {
+                aux = aux.left;
+            }
+            else if (v > aux.value) {
+                aux = aux.right;
+            }
+            else {
+                return true;
+            }
+        }
+        return false;
+    }
+    //----------------------------------------------------
+    public void printPath(int v) {
+        Vector path = new Vector();
+        Node aux = root;
+        while (aux != null) {
+            path.add(aux.value);
+            if (v < aux.value) {
+                aux = aux.left;
+            }
+            else if (v > aux.value) {
+                aux = aux.right;
+            }
+            else {
+                System.out.println(path);
+                return;
+            }
+        }
+        System.out.println("Do not exist.");
+    }
+    //----------------------------------------------------
     public void print() {
         print(root);
         System.out.println();
@@ -71,6 +107,22 @@ public class Tree {
         print(r.right);
     }
     //----------------------------------------------------
+    public void printLeafs() {
+        printLeafs(root);
+        System.out.println();
+    }
+    //----------------------------------------------------
+    private void printLeafs(Node r) {
+        if (r == null) return;
+        if (r.left == null && r.right == null) {
+            System.out.print(" "+r.value);
+        }
+        else {
+            printLeafs(r.left);
+            printLeafs(r.right);
+        }
+    }
+    //----------------------------------------------------
     public int count() {
         return count(root);
     }
@@ -78,6 +130,15 @@ public class Tree {
     private int count(Node r) {
         if (r == null) return 0;
         return count(r.left) + count(r.right) + 1;
+    }
+    //----------------------------------------------------
+    public int sum() {
+        return sum(root);
+    }
+    //----------------------------------------------------
+    private int sum(Node r) {
+        if (r == null) return 0;
+        return sum(r.left) + sum(r.right) + r.value;
     }
     //----------------------------------------------------
     private Node copy() {
@@ -127,5 +188,21 @@ public class Tree {
 	if (r.right != null) g.drawLine(rootInfo.xr+25,y+25,rightInfo.xr+15,y+50);
 
         return rootInfo;
+    }
+    //----------------------------------------------------
+    public void printLevel(int l) {
+        printLevel(l,root,0);
+        System.out.println();
+    }
+    //----------------------------------------------------
+    private void printLevel(int l,Node r,int c) {
+        if (r == null) return;
+        if (l == c) {
+            System.out.print(" "+r.value);
+        }
+        else {
+            printLevel(l,r.left,c+1);
+            printLevel(l,r.right,c+1);
+        }
     }
 }

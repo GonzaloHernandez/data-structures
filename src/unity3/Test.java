@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unti3;
+package unity3;
 
 import java.util.Random;
 
@@ -12,8 +12,8 @@ import java.util.Random;
  * @author chalo
  */
 public class Test {
-    public static void simpleListTest() {
-        System.out.println("-------------- Testing SimpleList ---------------");
+    public static void treeTest() {
+        System.out.println("-------------- Testing ABC Trees -----------------");
         Random r = new Random();
         Tree t = new Tree();
         for (int i=0; i<10; i++) {
@@ -22,11 +22,15 @@ public class Test {
         System.out.print("Initial values: ");
         t.print();
         t.draw("Initial Values");
-        t.add(20);
-        t.draw("After add a 20 value");
+        System.out.print("The tree leafs are: ");
+        t.printLeafs();
+        System.out.print("The elements of leve 2 are : ");
+        t.printLevel(2);
+        System.out.print("The path to element 2 is: ");
+        t.printPath(2);
     }
     
     public static void main(String args[]) {
-        simpleListTest();
+        treeTest();
     }
 }
