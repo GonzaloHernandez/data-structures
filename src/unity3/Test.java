@@ -29,6 +29,17 @@ public class Test {
         System.out.print("The path to element 2 is: ");
         t.printPath(2);
         System.out.println("The nearest leaf is: "+t.nearestLeaf());
+//        if (t.isComplete()) {
+//            System.out.println("This tree is Complete");
+//        }
+//        else {
+//            System.out.println("This tree isn't Complete");
+//        }
+//        t.prune();
+//        t.draw("After prunning");
+        t.balance();
+        t.balance();
+        t.draw("After balancing");
     }
     
     public static void main(String args[]) {
