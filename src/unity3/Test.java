@@ -6,6 +6,7 @@
 package unity3;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -40,6 +41,11 @@ public class Test {
         t.balance();
         t.balance();
         t.draw("After balancing");
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Which element do you want to remove? ");
+        int value = scan.nextInt();
+        t.remove(value);
+        t.draw("After removing the "+value+" element");
     }
     
     public static void main(String args[]) {

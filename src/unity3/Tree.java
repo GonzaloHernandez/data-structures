@@ -383,6 +383,62 @@ public class Tree {
 
     //----------------------------------------------------
 
+    public void remove(int v) {
+        Node aux = root, p = null;
+        while (aux != null) {
+            
+            if (v < aux.value) {
+                p = aux;
+                aux = aux.left;
+            }
+            else if (v > aux.value) {
+                p = aux;
+                aux = aux.right;
+            }
+            else {
+                if (aux == root) {
+                    if (root.left == null) {
+                        root = aux.right;
+                    }
+                    else {
+                        root = aux.left;
+                        Node q = root;
+                        while (q.right != null) {
+                            q = q.right;
+                        }
+                        q.right = aux.right;
+                    }
+                }
+                else {
+                    if (aux.left == null) {
+                        if (aux.value < p.value) {
+                            p.left = aux.right;
+                        }
+                        else {
+                            p.right = aux.right;
+                        }
+                    }
+                    else {
+                        if (aux.value < p.value) {
+                            p.left = aux.left;
+                        }
+                        else {
+                            p.right = aux.left;
+                        }                            
+                        Node q = aux.left;
+                        while (q.right != null) {
+                            q = q.right;
+                        }
+                        q.right = aux.right;
+                    }
+                }
+                return;
+            }
+        }
+    }
+            
+    //----------------------------------------------------
+
     private void leftRotation(Node r, Node handle) {
         if (handle == null) {
             root = r.right;
