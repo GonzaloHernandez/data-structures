@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unity3;
+package unity2;
 
 import java.awt.Graphics;
 import java.util.Vector;
@@ -444,16 +444,14 @@ public class Tree {
             root = r.right;
             r.right = root.left;
             root.left = r;
+        } else if (r == handle.left) {
+            handle.left = r.right;
+            r.right = handle.left.left;
+            handle.left.left = r;
         } else {
-            if (r == handle.left) {
-                handle.left = r.right;
-                r.right = handle.left.left;
-                handle.left.left = r;
-            } else {
-                handle.right = r.right;
-                r.right = handle.right.left;
-                handle.right.left = r;
-            }
+            handle.right = r.right;
+            r.right = handle.right.left;
+            handle.right.left = r;
         }
     }
 
@@ -464,16 +462,14 @@ public class Tree {
             root = r.left;
             r.left = root.right;
             root.right = r;
+        } else if (r == handle.left) {
+            handle.left = r.left;
+            r.left = handle.left.right;
+            handle.left.right = r;
         } else {
-            if (r == handle.left) {
-                handle.left = r.left;
-                r.left = handle.left.right;
-                handle.left.right = r;
-            } else {
-                handle.right = r.left;
-                r.left = handle.right.right;
-                handle.right.right = r;
-            }
+            handle.right = r.left;
+            r.left = handle.right.right;
+            handle.right.right = r;
         }
     }
 
