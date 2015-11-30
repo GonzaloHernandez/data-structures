@@ -511,4 +511,80 @@ public class Tree {
         }
         return height(r.left) - height(r.right);
     }
+
+    //----------------------------------------------------
+
+    public void printBrotherOf(int v) {
+        Node aux=root, p=null;
+        while (aux!=null) {
+            if (v > aux.value) {
+                p = aux;
+                aux = aux.right;
+            }
+            else if (v < aux.value) {
+                p = aux;
+                aux = aux.left;
+            }
+            else {
+                if (v < p.value && p.right != null) {
+                    System.out.println(" "+p.right.value);
+                }
+                else if (v > p.value && p.left != null) {
+                    System.out.println(" "+p.left.value);
+                }
+                break;
+            }
+        }
+        System.out.println("Do not exists");
+    }
+
+    //----------------------------------------------------
+
+    public void printFirstLeaf() {
+        if (root == null) {
+            System.out.println("Empty Tree");
+            return;
+        }
+        Node aux = root;
+        while (aux.left != null) {
+            aux = aux.left;
+            if (aux.left == null && aux.right != null) {
+                aux = aux.right;
+            }
+        }
+
+        System.out.println(" "+aux.value);
+    }
+
+    //----------------------------------------------------
+
+    public boolean isConsecutive() {
+        return isConsecutive(root);
+    }
+
+    private boolean isConsecutive(Node r) {
+        if (r == null) {
+            return true;
+        }
+        if (r.left != null) {
+            Node aux = r.left;
+            while (aux.right != null) {
+                aux = aux.right;
+            }
+            if (aux.value != r.value-1) {
+                return false;
+            }
+        }
+        if (r.right != null) {
+            Node aux = r.right;
+            while (aux.left != null) {
+                aux = aux.left;
+            }
+            if (aux.value != r.value+1) {
+                return false;
+            }
+        }
+        return isConsecutive(r.left) && isConsecutive(r.right);
+    }
 }
+
