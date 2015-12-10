@@ -383,6 +383,26 @@ public class Tree {
 
     //----------------------------------------------------
 
+    public void invert() {
+        invert(root);
+    }
+    
+    //----------------------------------------------------
+
+    private void invert(Node r) {
+        if (r == null) {
+            return;
+        }
+        Node aux = r.left;
+        r.left = r.right;
+        r.right = aux;
+        
+        invert(r.left);
+        invert(r.right);
+    }
+    
+    //----------------------------------------------------
+    
     public void remove(int v) {
         Node aux = root, p = null;
         while (aux != null) {
