@@ -52,4 +52,15 @@ public class SimpleList {
         }
         System.out.println();
     }
+    //----------------------------------------------------
+    public void invert() {
+        Node head2=null;
+        while (head != null) {
+            Node aux = head;
+            head = aux.next;
+            aux.next = head2;
+            head2 = aux;
+        }
+        head = head2;
+    }
 }
