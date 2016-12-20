@@ -40,4 +40,10 @@ public class Stack {
         }
         System.out.println();
     }
+    
+    public void remove() {
+        if (top > 0) {
+            top--;
+        }
+    }
 }
