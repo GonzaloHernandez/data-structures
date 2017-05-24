@@ -5,6 +5,7 @@
  */
 package unity2;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Vector;
 import javax.swing.JFrame;
@@ -206,27 +207,34 @@ public class Tree {
     class Info {
 
         int xRoot, xFinal;
+        
+        public Info(int xRoot, int xFinal) {
+            this.xRoot  = xRoot;
+            this.xFinal = xFinal;
+        }
     }
 
     //----------------------------------------------------
 
     private Info draw(Node r, int x, int y, Graphics g) {
-        Info rootInfo = new Info();
-        rootInfo.xFinal = x;
+        Info rootInfo = new Info(x,x);
         if (r == null) {
             return rootInfo;
         }
 
-        Info leftInfo, rightInfo;
-
-        leftInfo = draw(r.left, x, y + 50, g);
+        Info leftInfo = draw(r.left, x, y + 50, g);
         x = leftInfo.xFinal;
 
         g.drawOval(x, y, 30, 30);
         g.drawString("" + r.value, x + 10, y + 20);
+
+        g.setColor(Color.blue);
+        g.drawString(""+equilibriumFactor(r), x, y);
+        g.setColor(Color.black);
+
         rootInfo.xRoot = x;
 
-        rightInfo = draw(r.right, x + 30, y + 50, g);
+        Info rightInfo = draw(r.right, x + 30, y + 50, g);
         rootInfo.xFinal = rightInfo.xFinal;
 
         if (r.left != null) {
