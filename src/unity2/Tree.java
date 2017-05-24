@@ -418,17 +418,14 @@ public class Tree {
             if (v < aux.value) {
                 p = aux;
                 aux = aux.left;
-            }
-            else if (v > aux.value) {
+            } else if (v > aux.value) {
                 p = aux;
                 aux = aux.right;
-            }
-            else {
+            } else {
                 if (aux == root) {
                     if (root.left == null) {
                         root = aux.right;
-                    }
-                    else {
+                    } else {
                         root = aux.left;
                         Node q = root;
                         while (q.right != null) {
@@ -436,31 +433,30 @@ public class Tree {
                         }
                         q.right = aux.right;
                     }
-                }
-                else {
-                    if (aux.left == null) {
-                        if (aux.value < p.value) {
-                            p.left = aux.right;
-                        }
-                        else {
-                            p.right = aux.right;
-                        }
-                    }
-                    else {
-                        if (aux.value < p.value) {
-                            p.left = aux.left;
-                        }
-                        else {
-                            p.right = aux.left;
-                        }                            
-                        Node q = aux.left;
+                } else if (aux == p.left) {
+                    if (p.left.left == null) {
+                        p.left = aux.right;
+                    } else {
+                        p.left = aux.left;
+                        Node q = p.left;
                         while (q.right != null) {
                             q = q.right;
                         }
                         q.right = aux.right;
                     }
+                } else if (aux == p.right) {
+                    if (p.right.left == null) {
+                        p.right = aux.right;
+                    } else {
+                        p.right = aux.left;
+                        Node q = p.right;
+                        while (q.right != null) {
+                            q = q.right;
+                        }
+                        q.right = aux.right;
+                    }
+                    
                 }
-                return;
             }
         }
     }
