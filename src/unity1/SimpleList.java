@@ -53,6 +53,41 @@ public class SimpleList {
         System.out.println();
     }
     //----------------------------------------------------
+    public int count() {
+        Node aux=head;
+        int counter = 0;
+        while (aux != null) {
+            counter ++;
+            aux = aux.next;
+        }
+        return counter;
+    }
+    //----------------------------------------------------
+    public void insertAtBeginning(int v) {
+        Node n = new Node(v);
+        n.next = head;
+        head = n;
+    }
+    //----------------------------------------------------
+    public void insert(int v,int p) {
+        Node n = new Node(v);
+        Node aux = head,q = null;
+        int counter = 0;
+        while (aux != null) {
+            if (counter == p) {
+                n.next = aux;
+                if (aux == head) {
+                    head = n;
+                } else {
+                    q.next = n;
+                }
+                return;
+            }
+            q = aux;
+            aux = aux.next;
+        }
+    }
+    //----------------------------------------------------
     public void invert() {
         Node head2=null;
         while (head != null) {

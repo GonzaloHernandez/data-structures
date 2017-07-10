@@ -9,7 +9,7 @@ package unity0;
  *
  * @author chalo
  */
-public class Stack {
+public class Queue {
 
     public int MAX = 100;
     
@@ -20,7 +20,7 @@ public class Stack {
     
     //----------------------------------------------------
 
-    public Stack() {
+    public Queue() {
         values  = new int[MAX];
         top     = 0;
     }
@@ -29,7 +29,7 @@ public class Stack {
 
     public void add(int v) throws StaticListsException {
         if (top==MAX) {
-            throw new StaticListsException("Stack is full [trying to add " + v + "]");
+            throw new StaticListsException("Stack is full [trying to add " + v +"]");
         }
         values[top] = v;
         top++;
@@ -48,10 +48,14 @@ public class Stack {
 
     public int remove() throws StaticListsException {
         if (top == 0) {
-            throw new StaticListsException("There isn't elements [trying to remove last element]");
+            throw new StaticListsException("There isn't elements [trying to remove first element]");
         } else {
+            int v = values[0];
+            for (int i=0; i<top-1; i++) {
+                values[i] = values[i+1];
+            }
             top --;
-            return values[top];
+            return v;
         }
     }
 }

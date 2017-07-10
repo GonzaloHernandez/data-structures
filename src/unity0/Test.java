@@ -11,24 +11,66 @@ package unity0;
  */
 public class Test {
     
-    static class Student extends Item {
-        String  name;
-        long    code;
-        
-        public Student(String n,long c) {
-            name = n;
-            code = c;
-        }
-        
-        public String toString() {
-            return name+" "+code+"\n";
-        }
-    }
-    
     public static void main(String args[]) {
+        System.out.println("\n============= TESTING STACK CLASS ===============");
         Stack s = new Stack();
-        s.add(new Student("Gonzalo",2021192));
-        s.add(new Student("Jose",2026192));
-        s.print();
+        try {
+            s.add(48);
+            s.add(75);
+            s.add(17);
+
+            System.out.print("Current elements: "); s.print();
+
+            System.out.println("Removing..." + s.remove() );  
+            System.out.println("Removing..." + s.remove() );  
+            System.out.println("Removing..." + s.remove() );  
+            System.out.println("Removing..." + s.remove() );  
+
+        } catch (StaticListsException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        System.out.println("\n============= TESTING QUEUE CLASS ===============");
+        Queue q = new Queue();
+        try {
+            q.add(48);
+            q.add(75);
+            q.add(17);
+
+            System.out.print("Current elements: "); q.print();
+
+            System.out.println("Removing..." + q.remove() );  
+            System.out.println("Removing..." + q.remove() );  
+            System.out.println("Removing..." + q.remove() );  
+            System.out.println("Removing..." + q.remove() );  
+
+        } catch (StaticListsException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        System.out.println("\n============= TESTING LIST CLASS ===============");
+        List l = new List();
+        try {
+            l.add(48);
+            l.add(75);
+            l.add(17);
+            
+            l.insert(39, 1);
+            l.insert(55, 6);
+        } catch (StaticListsException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        System.out.print("Current elements: "); l.print();
+        
+        try {
+            
+            System.out.println("Removing..." + l.remove(1) );  
+            System.out.println("Removing..." + l.remove(5) ); 
+
+        } catch (StaticListsException ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
 }
